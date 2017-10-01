@@ -32,7 +32,5 @@ namespace AsyncAwaitData.SleepHandler
 
             return "Delayed for another 5 seconds";
         }
-
-
     }
 }
