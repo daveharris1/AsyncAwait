@@ -14,26 +14,26 @@ namespace AsyncAwaitData.StreamHandler
         {
             await Task.Delay(10000);
 
-            string v = string.Empty;
+            string result = string.Empty;
 
             using (StreamReader reader = new StreamReader(filePath))
             {
-                v = await reader.ReadToEndAsync();
+                result = await reader.ReadToEndAsync();
             }
-            return v;
+            return result;
         }
 
         public string ReadFile(string filePath)
         {
             Thread.Sleep(10000);
 
-            string v = string.Empty;
+            string result = string.Empty;
 
             using (StreamReader reader = new StreamReader(filePath))
             {
-                v = reader.ReadToEnd();
+                result = reader.ReadToEnd();
             }
-            return v;
+            return result;
         }
     }
 }
