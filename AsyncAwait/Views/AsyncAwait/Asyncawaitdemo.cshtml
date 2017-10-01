@@ -1,0 +1,74 @@
+﻿@model AsyncAwait.Models.AsyncawaitVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Asyncawaitdemo</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("MVCAsyncAwaitGetData", "AsyncAwait"))
+        {
+            <input type="submit" value="MVC Async Await Data" id="mvcAsyncAwaitBtn" name="ButtonType" />
+        }
+
+        @if (Model != null)
+        {
+            if (Model.TaskAwaitMVCData != string.Empty)
+            {
+                <div class="controlPadding">@Model.TaskAwaitMVCData</div>
+            }
+        }
+
+        @using (Html.BeginForm("MVCGetData", "AsyncAwait"))
+        {
+            <input type="submit" value="MVC Data" id="mvcBtn" name="ButtonType" />
+        }
+
+        @if (Model != null)
+        {
+            if (Model.MVCData != string.Empty)
+            {
+                <div class="controlPadding">@Model.MVCData</div>
+            }
+        }
+
+        <button id="ajaxBtn"> Get Ajax Data</button>
+
+        <div id="ajaxDiv" class="controlPadding"></div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script>
+
+        $('#ajaxBtn').click(function () {
+        $.ajax({
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        url: '@Url.Action("AjaxGetData", "AsyncAwait")',
+        success: function (data) {
+            console.log('result: ' + data);
+            $('#ajaxDiv').html(data.AjaxData);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+}
+);
+
+    </script>
+
+</body>
+
+</html>
